@@ -22,6 +22,6 @@ class API:
 
         for rt in risetimes:
             time = datetime.fromtimestamp(rt)
-            times.append(time)
+            times.append(time.strftime("%a %d %b %Y, %H:%M"))
             print(times)
         return times
