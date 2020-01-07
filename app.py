@@ -1,10 +1,19 @@
-from flask import Flask
+from flask import Flask, render_template
+import requests, json
+from api import API
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hello, World!"
+    # For New York: 
+    parameters = {
+        "lat": 40.71,
+        "lon": -74
+    }
+    response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters)
+    time = API.datetime(response)
+    return render_template("home.html", results=time)
 
 if __name__ == "__main__":
     app.run(debug=True)
