@@ -2,11 +2,13 @@ import requests, json
 from datetime import datetime
 
 class API:
-    @staticmethod
-    def jprint(obj):
-        text = json.dumps(obj, sort_keys=True, indent=4)
-        print(text)
+    # Method not currently in use
+    # @staticmethod
+    # def jprint(obj):
+    #     text = json.dumps(obj, sort_keys=True, indent=4)
+    #     print(text)
 
+    @staticmethod
     def datetime(obj):
         pass_times = obj.json()['response']
 
@@ -21,6 +23,5 @@ class API:
         for rt in risetimes:
             time = datetime.fromtimestamp(rt)
             times.append(time)
-            print(time)
+            print(times)
         return times
-        # return risetimes

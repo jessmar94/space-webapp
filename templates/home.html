@@ -8,7 +8,9 @@
     <h1> Welcome to My Space Website </h1>
     <p> Find out when the International Space Station is next flying over you... </p>
 
-    <div>{{results}}</div>
-    
+    {% for time in times %}
+    <ul>{{time}}</ul>
+    {% endfor %}
+
   </body>
 </html>
