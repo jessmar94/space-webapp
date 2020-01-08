@@ -1,6 +1,7 @@
 import unittest
 from model.api import API
 import json, requests
+from unittest.mock import Mock, patch
 
 class TestAPI(unittest.TestCase):
 
@@ -10,8 +11,11 @@ class TestAPI(unittest.TestCase):
     def test(self):
         self.assertTrue(True)
 
-    def test_datetime(self):
-        response2 = {
+    @patch('app.requests.get')
+    def test_datetime(self, obj):
+        """Mocking a whole function"""
+        mock_get_patcher = patch('app.requests.get')
+        json_response = {
             "message": "success",
             "request": {
                 "altitude": 100,
@@ -43,11 +47,7 @@ class TestAPI(unittest.TestCase):
                 }
             ]
         }
-        parameters = {
-            "lat": 40.71,
-            "lon": -74
-        }
-        response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters)
+
         results = [
             'Thu 09 Jan 2020, 02:43',
             'Thu 09 Jan 2020, 04:18',
@@ -55,8 +55,40 @@ class TestAPI(unittest.TestCase):
             'Thu 09 Jan 2020, 07:33',
             'Thu 09 Jan 2020, 09:11'
             ]
+
+        # Start patching 'requests.get'.
+        mock_get = mock_get_patcher.start()
+
+        # Configure the mock to return a response with status code 200 and relevant data.
+        mock_get.return_value = Mock(status_code = 200)
+        mock_get.return_value.json.return_value = json_response
+
+        # Call the service, which will send a request to the server.
+        response = self.api.datetime(json.parse(json_response))
+
+        # Stop patching 'requests'.
+        mock_get_patcher.stop()
+
+        # Assert that the request-response cycle completed successfully.
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(self.api.datetime(response), results)
+        self.assertEqual(response.json(), results)
+
+
+        # parameters = {
+        #     "lat": 40.71,
+        #     "lon": -74
+        # }
+        # response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters)
+        # results = [
+        #     'Thu 09 Jan 2020, 02:43',
+        #     'Thu 09 Jan 2020, 04:18',
+        #     'Thu 09 Jan 2020, 05:55',
+        #     'Thu 09 Jan 2020, 07:33',
+        #     'Thu 09 Jan 2020, 09:11'
+        #     ]
+        #
+        # self.assertEqual(response.status_code, 200)
+        # self.assertEqual(self.api.datetime(response), results)
 
 if __name__ == '__main__':
     unittest.main()
