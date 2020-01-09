@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import requests, json
-from model.api import API
+from model.format import Formatter
+from model.lat_long import Coordinates
 
 app = Flask(__name__)
 
@@ -9,24 +10,12 @@ def home():
     if request.method == "POST":
         req = request.form
         city = req.get("city")
-        parameters = {
-            "lat": 40.71,
-            "lon": -74
-        }
-        response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters)
+        coords = Coordinates.lat_long(city)
+        response = requests.get("http://api.open-notify.org/iss-pass.json", params=coords)
         pass_times = response.json()['response']
-        times = API.datetime(pass_times)
+        times = Formatter.datetime(pass_times)
         return render_template("home.html", times=times, city=city)
     return render_template("home.html")
-        # return redirect(request.url)
-    # For New York:
-    # parameters = {
-    #     "lat": 40.71,
-    #     "lon": -74
-    # }
-    # response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters)
-    # times = API.datetime(response)
-    # return render_template("home.html", times=times)
 
 if __name__ == "__main__":
     app.run(debug=True)
