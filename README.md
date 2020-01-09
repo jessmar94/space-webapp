@@ -35,4 +35,4 @@ $ python -m unittest tests/test_format.py
 ```
 
 ## Project Status
-If I have more time, I would like to add more tests to increase coverage. I would also consider adding further functionality or additional pages for the user to interact with. 
+This is the status of the project as of 9th Jan 2020. If I have more time, I would like to add more tests to increase coverage. I would also consider adding further functionality or additional pages for the user to interact with. 
