@@ -14,7 +14,8 @@ def home():
             "lon": -74
         }
         response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters)
-        times = API.datetime(response)
+        pass_times = response.json()['response']
+        times = API.datetime(pass_times)
         return render_template("home.html", times=times, city=city)
     return render_template("home.html")
         # return redirect(request.url)

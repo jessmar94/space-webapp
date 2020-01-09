@@ -1,7 +1,7 @@
 import requests, json
 from datetime import datetime
 
-class API:
+class Formatter:
     # Method not currently in use
     # @staticmethod
     # def jprint(obj):
@@ -9,9 +9,7 @@ class API:
     #     print(text)
 
     @staticmethod
-    def datetime(obj):
-        pass_times = obj.json()['response']
-
+    def datetime(pass_times):
         risetimes = []
 
         for d in pass_times:
