@@ -12,8 +12,8 @@
       <div class="form-group">
           <select id="city" name="city" class="change-picture">
             <option selected disabled hidden style='display: none'>Select City</option>
-            <option value="London" id="london" name="london">London</option>
-            <option value="Paris">Paris</option>
+            <option value="London">London</option>
+            <option value="Cape Town">Cape Town</option>
             <option value="Tokyo">Tokyo</option>
             <option value="New York">New York</option>
           </select>
@@ -21,12 +21,12 @@
       <button type="submit" class="btn btn-primary">Go!</button>
     </form>
 
-    {% if city == "New York" %}
-      <p> The next 5 passes for New York are:</p>
+      {% if city %}
+        <p> The next 5 passes for {{city}} are:</p>
         {% for time in times %}
-        <ul><li>{{time}}</li></ul>
+          <ul><li>{{time}}</li></ul>
         {% endfor %}
-    {% endif %}
+      {% endif %}
 
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   </body>
