@@ -2,12 +2,6 @@ import requests, json
 from datetime import datetime
 
 class Formatter:
-    # Method not currently in use
-    # @staticmethod
-    # def jprint(obj):
-    #     text = json.dumps(obj, sort_keys=True, indent=4)
-    #     print(text)
-
     @staticmethod
     def datetime(pass_times):
         risetimes = []
