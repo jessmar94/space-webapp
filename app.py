@@ -13,7 +13,6 @@ def home():
         coords = Coordinates.lat_long(city)
         response = requests.get("http://api.open-notify.org/iss-pass.json", params=coords)
         pass_times = response.json()['response']
-        print(pass_times)
         times = Formatter.datetime(pass_times)
         return render_template("home.html", times=times, city=city)
     return render_template("home.html")

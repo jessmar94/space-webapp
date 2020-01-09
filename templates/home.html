@@ -2,32 +2,41 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Space Webapp</title>
+    <title>Space Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      body {
+        background-color: #191970;
+      }
+    </style>
   </head>
-  <body>
-    <h1> Welcome to My Space Website </h1>
-    <p> Find out when the International Space Station is next flying over you... </p>
-    <h3>Select a city...</h3>
-    <form action="/" method="POST">
-      <div class="form-group">
-          <select id="city" name="city" class="change-picture">
-            <option selected disabled hidden style='display: none'>Select City</option>
-            <option value="London">London</option>
-            <option value="Cape Town">Cape Town</option>
-            <option value="Tokyo">Tokyo</option>
-            <option value="New York">New York</option>
-          </select>
-      </div>
-      <button type="submit" class="btn btn-primary">Go!</button>
-    </form>
+    <body class="text-center">
+        <br><h1 class="text-light"> Welcome to My Space Website </h1><br>
+        <h4 class="text-light"> Now you can see when the International Space Station is next flying over you.</h4><br>
+        <div class="text-muted">
+          <img src="static/space-shuttle.jpg" width="550" height="350">
+          <h3>Select a city:</h3>
+          <form action="/" method="POST">
+            <div class="form-group">
+                <select id="city" name="city" class="change-picture">
+                  <option selected disabled hidden style='display: none'>Select City</option>
+                  <option value="London">London</option>
+                  <option value="Cape Town">Cape Town</option>
+                  <option value="Tokyo">Tokyo</option>
+                  <option value="New York">New York</option>
+                </select>
+            </div>
+            <button type="submit"class="btn btn-secondary btn-lg disabled" role="button" aria-disabled="true">Go!</button>
+          </form>
+        <br>
 
-      {% if city %}
-        <p> The next 5 passes for {{city}} are:</p>
-        {% for time in times %}
-          <ul><li>{{time}}</li></ul>
-        {% endfor %}
-      {% endif %}
-
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  </body>
+          {% if city %}
+            <h5> The next 5 passes for {{city}} are:</h5>
+            {% for time in times %}
+              <li>{{time}}</li>
+            {% endfor %}
+          {% endif %}
+          </div>
+    </body>
 </html>
